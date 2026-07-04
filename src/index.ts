@@ -32,3 +32,5 @@ export * from './types/markets';
 export * from './endpoints/markets';
 export * from './types/holders';
 export * from './endpoints/holders';
+export * from './types/pnl';
+export * from './endpoints/pnl';

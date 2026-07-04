@@ -16,17 +16,20 @@ import { RebatesEndpoints } from './endpoints/rebates';
 import { EventsEndpoints } from './endpoints/events';
 import { MarketsEndpoints } from './endpoints/markets';
 import { HoldersEndpoints } from './endpoints/holders';
+import { PnlEndpoints } from './endpoints/pnl';
 
 export interface PolymarketClientConfig {
     gammaApiUrl?: string;
     dataApiUrl?: string;
     clobApiUrl?: string;
+    pnlApiUrl?: string;
 }
 
 export class PolymarketClient {
     public readonly gammaApi: AxiosInstance;
     public readonly dataApi: AxiosInstance;
     public readonly clobApi: AxiosInstance;
+    public readonly pnlApi: AxiosInstance;
 
     public readonly profile: ProfileEndpoints;
     public readonly positions: PositionsEndpoints;
@@ -45,6 +48,7 @@ export class PolymarketClient {
     public readonly events: EventsEndpoints;
     public readonly markets: MarketsEndpoints;
     public readonly holders: HoldersEndpoints;
+    public readonly pnl: PnlEndpoints;
 
     constructor(config?: PolymarketClientConfig) {
         this.gammaApi = axios.create({
@@ -68,6 +72,13 @@ export class PolymarketClient {
             },
         });
 
+        this.pnlApi = axios.create({
+            baseURL: config?.pnlApiUrl || 'https://user-pnl-api.polymarket.com',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
         this.profile = new ProfileEndpoints(this);
         this.positions = new PositionsEndpoints(this);
         this.activity = new ActivityEndpoints(this);
@@ -85,5 +96,6 @@ export class PolymarketClient {
         this.events = new EventsEndpoints(this);
         this.markets = new MarketsEndpoints(this);
         this.holders = new HoldersEndpoints(this);
+        this.pnl = new PnlEndpoints(this);
     }
 }
