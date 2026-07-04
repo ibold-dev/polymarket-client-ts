@@ -13,6 +13,7 @@ import { SportsEndpoints } from './endpoints/sports';
 import { TeamsEndpoints } from './endpoints/teams';
 import { RewardsEndpoints } from './endpoints/rewards';
 import { RebatesEndpoints } from './endpoints/rebates';
+import { EventsEndpoints } from './endpoints/events';
 
 export interface PolymarketClientConfig {
     gammaApiUrl?: string;
@@ -39,6 +40,7 @@ export class PolymarketClient {
     public readonly teams: TeamsEndpoints;
     public readonly rewards: RewardsEndpoints;
     public readonly rebates: RebatesEndpoints;
+    public readonly events: EventsEndpoints;
 
     constructor(config?: PolymarketClientConfig) {
         this.gammaApi = axios.create({
@@ -76,5 +78,6 @@ export class PolymarketClient {
         this.teams = new TeamsEndpoints(this);
         this.rewards = new RewardsEndpoints(this);
         this.rebates = new RebatesEndpoints(this);
+        this.events = new EventsEndpoints(this);
     }
 }

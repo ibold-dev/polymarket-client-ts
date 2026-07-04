@@ -26,3 +26,5 @@ export * from './types/rewards';
 export * from './endpoints/rewards';
 export * from './types/rebates';
 export * from './endpoints/rebates';
+export * from './types/events';
+export * from './endpoints/events';
