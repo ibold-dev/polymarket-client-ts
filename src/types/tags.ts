@@ -8,3 +8,7 @@ export interface GetTagsParams {
     include_template?: boolean;
     is_carousel?: boolean;
 }
+
+export interface GetTagParams {
+    include_template?: boolean;
+}

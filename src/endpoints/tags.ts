@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { Tag, GetTagsParams } from '../types/tags';
+import { Tag, GetTagsParams, GetTagParams } from '../types/tags';
 
 export class TagsEndpoints {
     constructor(private readonly client: PolymarketClient) {}
@@ -13,6 +13,22 @@ export class TagsEndpoints {
         const queryParams: Record<string, any> = { ...params };
 
         const response = await this.client.gammaApi.get<Tag[]>('/tags', {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Get a tag by its ID.
+     * @param id The tag ID.
+     * @param params Query parameters for fetching the tag.
+     * @returns A single tag.
+     */
+    public async getTag(id: number | string, params?: GetTagParams): Promise<Tag> {
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.gammaApi.get<Tag>(`/tags/${id}`, {
             params: queryParams
         });
 
