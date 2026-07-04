@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { Trade, GetTradesParams } from '../types/trades';
+import { Trade, GetTradesParams, TradedCount, GetTradedParams } from '../types/trades';
 
 export class TradesEndpoints {
     constructor(private readonly client: PolymarketClient) {}
@@ -24,6 +24,25 @@ export class TradesEndpoints {
         }
 
         const response = await this.client.dataApi.get<Trade[]>('/trades', {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Gets the total markets a user has traded.
+     * @param params Query parameters including the required 'user' wallet address.
+     * @returns An object containing the count of traded markets.
+     */
+    public async getTotalMarketsTraded(params: GetTradedParams): Promise<TradedCount> {
+        if (!/^0x[a-fA-F0-9]{40}$/.test(params.user)) {
+            throw new Error('Invalid wallet address format for user. Must be a valid Ethereum address.');
+        }
+
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.dataApi.get<TradedCount>('/traded', {
             params: queryParams
         });
 

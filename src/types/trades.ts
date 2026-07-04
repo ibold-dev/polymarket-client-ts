@@ -58,3 +58,15 @@ export interface GetTradesParams {
      */
     side?: 'BUY' | 'SELL';
 }
+
+export interface TradedCount {
+    user?: string;
+    traded?: number;
+}
+
+export interface GetTradedParams {
+    /**
+     * User Profile Address (0x-prefixed, 40 hex chars)
+     */
+    user: string;
+}

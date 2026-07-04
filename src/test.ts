@@ -49,6 +49,11 @@ async function main() {
             console.log('First trade data:');
             console.log(JSON.stringify(trades[0], null, 2));
         }
+
+        console.log(`\nFetching total markets traded for ${addressToTest}...`);
+        const totalMarkets = await client.trades.getTotalMarketsTraded({ user: addressToTest });
+        console.log('Success! Total markets traded data:');
+        console.log(JSON.stringify(totalMarkets, null, 2));
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }
