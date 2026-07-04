@@ -17,8 +17,16 @@ async function main() {
         const positions = await client.positions.getCurrentPositions({ user: addressToTest });
         console.log(`Success! Found ${positions.length} active positions.`);
         if (positions.length > 0) {
-            console.log('First position data:');
+            console.log('First active position data:');
             console.log(JSON.stringify(positions[0], null, 2));
+        }
+
+        console.log(`\nFetching closed positions for ${addressToTest}...`);
+        const closedPositions = await client.positions.getClosedPositions({ user: addressToTest });
+        console.log(`Success! Found ${closedPositions.length} closed positions.`);
+        if (closedPositions.length > 0) {
+            console.log('First closed position data:');
+            console.log(JSON.stringify(closedPositions[0], null, 2));
         }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
