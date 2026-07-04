@@ -98,6 +98,14 @@ async function main() {
         if (searchResults.events && searchResults.events.length > 0) {
             console.log('First matched event title:', searchResults.events[0].title);
         }
+
+        console.log(`\nFetching list of tags...`);
+        const tagsList = await client.tags.getTags({ limit: 5 });
+        console.log(`Success! Found ${tagsList.length} tags.`);
+        if (tagsList.length > 0) {
+            console.log('First tag data:');
+            console.log(JSON.stringify(tagsList[0], null, 2));
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }
