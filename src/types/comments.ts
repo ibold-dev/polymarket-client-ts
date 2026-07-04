@@ -55,3 +55,8 @@ export interface GetCommentsParams {
     get_positions?: boolean;
     holders_only?: boolean;
 }
+
+export interface GetCommentsByIdParams {
+    get_positions?: boolean;
+}
+
