@@ -11,3 +11,5 @@ export * from './types/leaderboard';
 export * from './endpoints/leaderboard';
 export * from './types/builders';
 export * from './endpoints/builders';
+export * from './types/search';
+export * from './endpoints/search';

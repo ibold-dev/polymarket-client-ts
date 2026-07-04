@@ -91,6 +91,13 @@ async function main() {
             console.log('First volume record:');
             console.log(JSON.stringify(builderVolume[0], null, 2));
         }
+
+        console.log(`\nSearching for "election" on Gamma API...`);
+        const searchResults = await client.search.search({ q: 'election', limit_per_type: 2 });
+        console.log(`Success! Found ${searchResults.events?.length || 0} events and ${searchResults.tags?.length || 0} tags.`);
+        if (searchResults.events && searchResults.events.length > 0) {
+            console.log('First matched event title:', searchResults.events[0].title);
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }
