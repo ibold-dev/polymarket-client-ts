@@ -10,6 +10,7 @@ import { LeaderboardEndpoints } from './endpoints/leaderboard';
 import { SeriesEndpoints } from './endpoints/series';
 import { CommentsEndpoints } from './endpoints/comments';
 import { SportsEndpoints } from './endpoints/sports';
+import { TeamsEndpoints } from './endpoints/teams';
 
 export interface PolymarketClientConfig {
     gammaApiUrl?: string;
@@ -31,6 +32,7 @@ export class PolymarketClient {
     public readonly series: SeriesEndpoints;
     public readonly comments: CommentsEndpoints;
     public readonly sports: SportsEndpoints;
+    public readonly teams: TeamsEndpoints;
 
     constructor(config?: PolymarketClientConfig) {
         this.gammaApi = axios.create({
@@ -58,5 +60,6 @@ export class PolymarketClient {
         this.series = new SeriesEndpoints(this);
         this.comments = new CommentsEndpoints(this);
         this.sports = new SportsEndpoints(this);
+        this.teams = new TeamsEndpoints(this);
     }
 }

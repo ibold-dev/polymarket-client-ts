@@ -20,3 +20,5 @@ export * from './types/comments';
 export * from './endpoints/comments';
 export * from './types/sports';
 export * from './endpoints/sports';
+export * from './types/teams';
+export * from './endpoints/teams';
