@@ -22,3 +22,5 @@ export * from './types/sports';
 export * from './endpoints/sports';
 export * from './types/teams';
 export * from './endpoints/teams';
+export * from './types/rewards';
+export * from './endpoints/rewards';

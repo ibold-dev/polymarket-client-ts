@@ -11,15 +11,18 @@ import { SeriesEndpoints } from './endpoints/series';
 import { CommentsEndpoints } from './endpoints/comments';
 import { SportsEndpoints } from './endpoints/sports';
 import { TeamsEndpoints } from './endpoints/teams';
+import { RewardsEndpoints } from './endpoints/rewards';
 
 export interface PolymarketClientConfig {
     gammaApiUrl?: string;
     dataApiUrl?: string;
+    clobApiUrl?: string;
 }
 
 export class PolymarketClient {
     public readonly gammaApi: AxiosInstance;
     public readonly dataApi: AxiosInstance;
+    public readonly clobApi: AxiosInstance;
 
     public readonly profile: ProfileEndpoints;
     public readonly positions: PositionsEndpoints;
@@ -33,6 +36,7 @@ export class PolymarketClient {
     public readonly comments: CommentsEndpoints;
     public readonly sports: SportsEndpoints;
     public readonly teams: TeamsEndpoints;
+    public readonly rewards: RewardsEndpoints;
 
     constructor(config?: PolymarketClientConfig) {
         this.gammaApi = axios.create({
@@ -44,6 +48,13 @@ export class PolymarketClient {
 
         this.dataApi = axios.create({
             baseURL: config?.dataApiUrl || 'https://data-api.polymarket.com',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        });
+
+        this.clobApi = axios.create({
+            baseURL: config?.clobApiUrl || 'https://clob.polymarket.com',
             headers: {
                 'Content-Type': 'application/json',
             },
@@ -61,5 +72,6 @@ export class PolymarketClient {
         this.comments = new CommentsEndpoints(this);
         this.sports = new SportsEndpoints(this);
         this.teams = new TeamsEndpoints(this);
+        this.rewards = new RewardsEndpoints(this);
     }
 }
