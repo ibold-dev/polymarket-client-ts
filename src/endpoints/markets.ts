@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { KeysetMarketsResponse, GetMarketsKeysetParams, GetMarketsParams, GetMarketParams, MarketByTokenResponse, GetOpenInterestParams, OpenInterest } from '../types/markets';
+import { KeysetMarketsResponse, GetMarketsKeysetParams, GetMarketsParams, GetMarketParams, MarketByTokenResponse, GetOpenInterestParams, OpenInterest, CursorPaginationParams, PaginatedSimplifiedMarkets, PaginatedClobMarkets } from '../types/markets';
 import { Market, Tag } from '../types/search';
 
 export class MarketsEndpoints {
@@ -102,6 +102,42 @@ export class MarketsEndpoints {
 
         const response = await this.client.dataApi.get<OpenInterest[]>('/oi', {
             params: queryParams
+        });
+        return response.data;
+    }
+
+    /**
+     * Get simplified markets (CLOB API).
+     * @param params Query parameters for pagination.
+     * @returns Paginated simplified markets.
+     */
+    public async getSimplifiedMarkets(params?: CursorPaginationParams): Promise<PaginatedSimplifiedMarkets> {
+        const response = await this.client.clobApi.get<PaginatedSimplifiedMarkets>('/simplified-markets', {
+            params
+        });
+        return response.data;
+    }
+
+    /**
+     * Get sampling markets (CLOB API).
+     * @param params Query parameters for pagination.
+     * @returns Paginated CLOB markets.
+     */
+    public async getSamplingMarkets(params?: CursorPaginationParams): Promise<PaginatedClobMarkets> {
+        const response = await this.client.clobApi.get<PaginatedClobMarkets>('/sampling-markets', {
+            params
+        });
+        return response.data;
+    }
+
+    /**
+     * Get sampling simplified markets (CLOB API).
+     * @param params Query parameters for pagination.
+     * @returns Paginated simplified markets.
+     */
+    public async getSamplingSimplifiedMarkets(params?: CursorPaginationParams): Promise<PaginatedSimplifiedMarkets> {
+        const response = await this.client.clobApi.get<PaginatedSimplifiedMarkets>('/sampling-simplified-markets', {
+            params
         });
         return response.data;
     }
