@@ -60,3 +60,10 @@ export interface GetCommentsByIdParams {
     get_positions?: boolean;
 }
 
+export interface GetCommentsByUserAddressParams {
+    limit?: number;
+    offset?: number;
+    order?: string;
+    ascending?: boolean;
+}
+
