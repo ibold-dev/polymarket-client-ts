@@ -128,3 +128,19 @@ export interface GetClosedPositionsParams {
      */
     sortDirection?: 'ASC' | 'DESC';
 }
+
+export interface PositionValue {
+    user?: string;
+    value?: number;
+}
+
+export interface GetValueParams {
+    /**
+     * User Profile Address (0x-prefixed, 40 hex chars)
+     */
+    user: string;
+    /**
+     * Comma-separated list of condition IDs.
+     */
+    market?: string | string[];
+}

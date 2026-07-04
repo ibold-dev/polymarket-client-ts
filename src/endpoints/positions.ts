@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { CurrentPosition, GetPositionsParams, ClosedPosition, GetClosedPositionsParams } from '../types/positions';
+import { CurrentPosition, GetPositionsParams, ClosedPosition, GetClosedPositionsParams, PositionValue, GetValueParams } from '../types/positions';
 
 export class PositionsEndpoints {
     constructor(private readonly client: PolymarketClient) {}
@@ -50,6 +50,29 @@ export class PositionsEndpoints {
         }
 
         const response = await this.client.dataApi.get<ClosedPosition[]>('/closed-positions', {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Gets the total value of a user's positions.
+     * @param params Query parameters including the required 'user' wallet address.
+     * @returns An array containing the user's total position value.
+     */
+    public async getTotalValue(params: GetValueParams): Promise<PositionValue[]> {
+        if (!/^0x[a-fA-F0-9]{40}$/.test(params.user)) {
+            throw new Error('Invalid wallet address format for user. Must be a valid Ethereum address.');
+        }
+
+        const queryParams: Record<string, any> = { ...params };
+
+        if (Array.isArray(queryParams.market)) {
+            queryParams.market = queryParams.market.join(',');
+        }
+
+        const response = await this.client.dataApi.get<PositionValue[]>('/value', {
             params: queryParams
         });
 

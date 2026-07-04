@@ -36,6 +36,11 @@ async function main() {
             console.log('First activity data:');
             console.log(JSON.stringify(activity[0], null, 2));
         }
+
+        console.log(`\nFetching total value for ${addressToTest}...`);
+        const totalValue = await client.positions.getTotalValue({ user: addressToTest });
+        console.log('Success! Total value data:');
+        console.log(JSON.stringify(totalValue, null, 2));
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }
