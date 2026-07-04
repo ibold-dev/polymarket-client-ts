@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { CurrentPosition, GetPositionsParams, ClosedPosition, GetClosedPositionsParams, PositionValue, GetValueParams } from '../types/positions';
+import { CurrentPosition, GetPositionsParams, ClosedPosition, GetClosedPositionsParams, PositionValue, GetValueParams, MetaMarketPositionV1, GetMarketPositionsParams } from '../types/positions';
 
 export class PositionsEndpoints {
     constructor(private readonly client: PolymarketClient) {}
@@ -73,6 +73,21 @@ export class PositionsEndpoints {
         }
 
         const response = await this.client.dataApi.get<PositionValue[]>('/value', {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Gets positions for a specific market.
+     * @param params Query parameters including the required 'market' condition ID.
+     * @returns An array of meta market positions (positions grouped by outcome token).
+     */
+    public async getMarketPositions(params: GetMarketPositionsParams): Promise<MetaMarketPositionV1[]> {
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.dataApi.get<MetaMarketPositionV1[]>('/v1/market-positions', {
             params: queryParams
         });
 

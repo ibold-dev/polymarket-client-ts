@@ -144,3 +144,62 @@ export interface GetValueParams {
      */
     market?: string | string[];
 }
+
+export interface MarketPositionV1 {
+    proxyWallet?: string;
+    name?: string;
+    profileImage?: string;
+    verified?: boolean;
+    asset?: string;
+    conditionId?: string;
+    avgPrice?: number;
+    size?: number;
+    currPrice?: number;
+    currentValue?: number;
+    cashPnl?: number;
+    totalBought?: number;
+    realizedPnl?: number;
+    totalPnl?: number;
+    outcome?: string;
+    outcomeIndex?: number;
+}
+
+export interface MetaMarketPositionV1 {
+    /**
+     * The outcome token asset ID
+     */
+    token?: string;
+    positions?: MarketPositionV1[];
+}
+
+export interface GetMarketPositionsParams {
+    /**
+     * The condition ID of the market to query positions for
+     */
+    market: string;
+    /**
+     * Filter to a single user by proxy wallet address
+     */
+    user?: string;
+    /**
+     * Filter positions by status. Defaults to ALL.
+     * OPEN: size > 0.01, CLOSED: size <= 0.01
+     */
+    status?: 'OPEN' | 'CLOSED' | 'ALL';
+    /**
+     * Sort metric. Defaults to TOTAL_PNL.
+     */
+    sortBy?: 'TOKENS' | 'CASH_PNL' | 'REALIZED_PNL' | 'TOTAL_PNL';
+    /**
+     * Sort direction. Defaults to DESC.
+     */
+    sortDirection?: 'ASC' | 'DESC';
+    /**
+     * Max number of positions to return per outcome token. Max 500, defaults to 50.
+     */
+    limit?: number;
+    /**
+     * Pagination offset per outcome token. Max 10000, defaults to 0.
+     */
+    offset?: number;
+}

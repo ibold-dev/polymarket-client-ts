@@ -54,6 +54,19 @@ async function main() {
         const totalMarkets = await client.trades.getTotalMarketsTraded({ user: addressToTest });
         console.log('Success! Total markets traded data:');
         console.log(JSON.stringify(totalMarkets, null, 2));
+
+        if (positions.length > 0 && positions[0].conditionId) {
+            const conditionId = positions[0].conditionId;
+            console.log(`\nFetching market positions for condition ID ${conditionId}...`);
+            const marketPositions = await client.positions.getMarketPositions({ market: conditionId, limit: 5 });
+            console.log(`Success! Found data for ${marketPositions.length} outcome tokens.`);
+            if (marketPositions.length > 0) {
+                console.log('First token positions data:');
+                console.log(JSON.stringify(marketPositions[0], null, 2));
+            }
+        } else {
+            console.log('\nSkipping market positions test (no active positions to extract conditionId from).');
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }
