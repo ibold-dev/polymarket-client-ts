@@ -14,3 +14,5 @@ export * from './types/search';
 export * from './endpoints/search';
 export * from './types/tags';
 export * from './endpoints/tags';
+export * from './types/series';
+export * from './endpoints/series';
