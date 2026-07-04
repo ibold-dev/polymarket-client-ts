@@ -83,6 +83,14 @@ async function main() {
             console.log('Top builder data:');
             console.log(JSON.stringify(builderLeaderboard[0], null, 2));
         }
+
+        console.log(`\nFetching weekly builder volume time-series...`);
+        const builderVolume = await client.builders.getVolume({ timePeriod: 'WEEK' });
+        console.log(`Success! Found ${builderVolume.length} daily volume records.`);
+        if (builderVolume.length > 0) {
+            console.log('First volume record:');
+            console.log(JSON.stringify(builderVolume[0], null, 2));
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }

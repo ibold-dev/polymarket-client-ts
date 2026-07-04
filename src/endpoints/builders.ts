@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { BuilderLeaderboardEntry, GetBuilderLeaderboardParams } from '../types/builders';
+import { BuilderLeaderboardEntry, GetBuilderLeaderboardParams, BuilderVolumeEntry, GetBuilderVolumeParams } from '../types/builders';
 
 export class BuildersEndpoints {
     constructor(private readonly client: PolymarketClient) {}
@@ -13,6 +13,21 @@ export class BuildersEndpoints {
         const queryParams: Record<string, any> = { ...params };
 
         const response = await this.client.dataApi.get<BuilderLeaderboardEntry[]>('/v1/builders/leaderboard', {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Gets daily builder volume time-series.
+     * @param params Query parameters for fetching the builders volume time-series.
+     * @returns An array of daily builder volume records.
+     */
+    public async getVolume(params?: GetBuilderVolumeParams): Promise<BuilderVolumeEntry[]> {
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.dataApi.get<BuilderVolumeEntry[]>('/v1/builders/volume', {
             params: queryParams
         });
 
