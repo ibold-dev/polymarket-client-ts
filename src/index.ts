@@ -7,3 +7,5 @@ export * from './types/activity';
 export * from './endpoints/activity';
 export * from './types/trades';
 export * from './endpoints/trades';
+export * from './types/leaderboard';
+export * from './endpoints/leaderboard';

@@ -67,6 +67,14 @@ async function main() {
         } else {
             console.log('\nSkipping market positions test (no active positions to extract conditionId from).');
         }
+
+        console.log(`\nFetching top 5 overall traders on the daily leaderboard...`);
+        const leaderboard = await client.leaderboard.getLeaderboard({ limit: 5 });
+        console.log(`Success! Found ${leaderboard.length} traders.`);
+        if (leaderboard.length > 0) {
+            console.log('Top trader data:');
+            console.log(JSON.stringify(leaderboard[0], null, 2));
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }
