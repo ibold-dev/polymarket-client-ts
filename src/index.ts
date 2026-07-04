@@ -24,3 +24,5 @@ export * from './types/teams';
 export * from './endpoints/teams';
 export * from './types/rewards';
 export * from './endpoints/rewards';
+export * from './types/rebates';
+export * from './endpoints/rebates';
