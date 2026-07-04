@@ -18,3 +18,5 @@ export * from './types/series';
 export * from './endpoints/series';
 export * from './types/comments';
 export * from './endpoints/comments';
+export * from './types/sports';
+export * from './endpoints/sports';
