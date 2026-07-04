@@ -16,3 +16,5 @@ export * from './types/tags';
 export * from './endpoints/tags';
 export * from './types/series';
 export * from './endpoints/series';
+export * from './types/comments';
+export * from './endpoints/comments';
