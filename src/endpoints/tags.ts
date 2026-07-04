@@ -34,4 +34,20 @@ export class TagsEndpoints {
 
         return response.data;
     }
+
+    /**
+     * Get a tag by its slug.
+     * @param slug The tag slug.
+     * @param params Query parameters for fetching the tag.
+     * @returns A single tag.
+     */
+    public async getTagBySlug(slug: string, params?: GetTagParams): Promise<Tag> {
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.gammaApi.get<Tag>(`/tags/slug/${slug}`, {
+            params: queryParams
+        });
+
+        return response.data;
+    }
 }
