@@ -41,6 +41,14 @@ async function main() {
         const totalValue = await client.positions.getTotalValue({ user: addressToTest });
         console.log('Success! Total value data:');
         console.log(JSON.stringify(totalValue, null, 2));
+
+        console.log(`\nFetching trades for ${addressToTest}...`);
+        const trades = await client.trades.getTrades({ user: addressToTest });
+        console.log(`Success! Found ${trades.length} trades.`);
+        if (trades.length > 0) {
+            console.log('First trade data:');
+            console.log(JSON.stringify(trades[0], null, 2));
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }

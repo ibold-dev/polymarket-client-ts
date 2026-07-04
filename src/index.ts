@@ -5,3 +5,5 @@ export * from './types/positions';
 export * from './endpoints/positions';
 export * from './types/activity';
 export * from './endpoints/activity';
+export * from './types/trades';
+export * from './endpoints/trades';

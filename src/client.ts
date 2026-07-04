@@ -2,6 +2,7 @@ import axios, { AxiosInstance } from 'axios';
 import { ProfileEndpoints } from './endpoints/profile';
 import { PositionsEndpoints } from './endpoints/positions';
 import { ActivityEndpoints } from './endpoints/activity';
+import { TradesEndpoints } from './endpoints/trades';
 
 export interface PolymarketClientConfig {
     gammaApiUrl?: string;
@@ -15,6 +16,7 @@ export class PolymarketClient {
     public readonly profile: ProfileEndpoints;
     public readonly positions: PositionsEndpoints;
     public readonly activity: ActivityEndpoints;
+    public readonly trades: TradesEndpoints;
 
     constructor(config?: PolymarketClientConfig) {
         this.gammaApi = axios.create({
@@ -34,5 +36,6 @@ export class PolymarketClient {
         this.profile = new ProfileEndpoints(this);
         this.positions = new PositionsEndpoints(this);
         this.activity = new ActivityEndpoints(this);
+        this.trades = new TradesEndpoints(this);
     }
 }
