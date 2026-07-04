@@ -28,6 +28,14 @@ async function main() {
             console.log('First closed position data:');
             console.log(JSON.stringify(closedPositions[0], null, 2));
         }
+
+        console.log(`\nFetching user activity for ${addressToTest}...`);
+        const activity = await client.activity.getUserActivity({ user: addressToTest });
+        console.log(`Success! Found ${activity.length} activity items.`);
+        if (activity.length > 0) {
+            console.log('First activity data:');
+            console.log(JSON.stringify(activity[0], null, 2));
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }
