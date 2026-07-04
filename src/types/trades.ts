@@ -70,3 +70,99 @@ export interface GetTradedParams {
      */
     user: string;
 }
+
+export interface MakerOrder {
+    order_id?: string;
+    owner?: string;
+    maker_address?: string;
+    matched_amount?: string;
+    price?: string;
+    fee_rate_bps?: string;
+    asset_id?: string;
+    outcome?: string;
+    side?: 'BUY' | 'SELL';
+}
+
+export interface ClobTrade {
+    id: string;
+    taker_order_id: string;
+    market: string;
+    asset_id: string;
+    side: 'BUY' | 'SELL';
+    size: string;
+    fee_rate_bps?: string;
+    price: string;
+    status: string;
+    match_time: string;
+    match_time_nano?: string;
+    last_update: string;
+    outcome: string;
+    bucket_index: number;
+    owner: string;
+    maker_address: string;
+    transaction_hash?: string;
+    err_msg?: string | null;
+    maker_orders?: MakerOrder[];
+    trader_side: 'TAKER' | 'MAKER';
+}
+
+export interface ClobTradesResponse {
+    limit: number;
+    next_cursor: string;
+    count: number;
+    data: ClobTrade[];
+}
+
+export interface GetClobTradesParams {
+    id?: string;
+    maker_address: string;
+    market?: string;
+    asset_id?: string;
+    before?: string;
+    after?: string;
+    next_cursor?: string;
+}
+
+export interface BuilderTrade {
+    id: string;
+    tradeType: string;
+    takerOrderHash: string;
+    builder: string;
+    market: string;
+    assetId: string;
+    side: 'BUY' | 'SELL';
+    size: string;
+    sizeUsdc: string;
+    price: string;
+    status: string;
+    outcome: string;
+    outcomeIndex: number;
+    owner: string;
+    maker: string;
+    transactionHash?: string;
+    matchTime: string;
+    bucketIndex: number;
+    fee: string;
+    feeUsdc: string;
+    err_msg?: string | null;
+    createdAt?: string;
+    updatedAt?: string;
+}
+
+export interface BuilderTradesResponse {
+    limit: number;
+    next_cursor: string;
+    count: number;
+    data: BuilderTrade[];
+}
+
+export interface GetBuilderTradesParams {
+    builder_code: string;
+    id?: string;
+    market?: string;
+    asset_id?: string;
+    before?: string;
+    after?: string;
+    next_cursor?: string;
+}
+

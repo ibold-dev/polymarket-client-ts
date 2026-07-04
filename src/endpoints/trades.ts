@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { Trade, GetTradesParams, TradedCount, GetTradedParams } from '../types/trades';
+import { Trade, GetTradesParams, TradedCount, GetTradedParams, GetClobTradesParams, ClobTradesResponse, GetBuilderTradesParams, BuilderTradesResponse } from '../types/trades';
 
 export class TradesEndpoints {
     constructor(private readonly client: PolymarketClient) {}
@@ -43,6 +43,36 @@ export class TradesEndpoints {
         const queryParams: Record<string, any> = { ...params };
 
         const response = await this.client.dataApi.get<TradedCount>('/traded', {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Retrieves trades for the authenticated user (CLOB API).
+     * @param params Query parameters for fetching CLOB trades.
+     * @returns A paginated list of CLOB trades.
+     */
+    public async getClobTrades(params: GetClobTradesParams): Promise<ClobTradesResponse> {
+        const queryParams: Record<string, any> = { ...params };
+        
+        const response = await this.client.clobApi.get<ClobTradesResponse>('/data/trades', {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Retrieves trades attributed to a builder code (CLOB API).
+     * @param params Query parameters for fetching builder trades.
+     * @returns A paginated list of builder trades.
+     */
+    public async getBuilderTrades(params: GetBuilderTradesParams): Promise<BuilderTradesResponse> {
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.clobApi.get<BuilderTradesResponse>('/builder/trades', {
             params: queryParams
         });
 
