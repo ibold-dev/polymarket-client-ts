@@ -75,6 +75,14 @@ async function main() {
             console.log('Top trader data:');
             console.log(JSON.stringify(leaderboard[0], null, 2));
         }
+
+        console.log(`\nFetching top 5 builders on the daily leaderboard...`);
+        const builderLeaderboard = await client.builders.getLeaderboard({ limit: 5 });
+        console.log(`Success! Found ${builderLeaderboard.length} builders.`);
+        if (builderLeaderboard.length > 0) {
+            console.log('Top builder data:');
+            console.log(JSON.stringify(builderLeaderboard[0], null, 2));
+        }
     } catch (error) {
         console.error('Failed to fetch profile:', error);
     }

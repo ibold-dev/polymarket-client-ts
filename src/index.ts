@@ -9,3 +9,5 @@ export * from './types/trades';
 export * from './endpoints/trades';
 export * from './types/leaderboard';
 export * from './endpoints/leaderboard';
+export * from './types/builders';
+export * from './endpoints/builders';

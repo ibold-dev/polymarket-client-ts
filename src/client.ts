@@ -4,6 +4,7 @@ import { PositionsEndpoints } from './endpoints/positions';
 import { ActivityEndpoints } from './endpoints/activity';
 import { TradesEndpoints } from './endpoints/trades';
 import { LeaderboardEndpoints } from './endpoints/leaderboard';
+import { BuildersEndpoints } from './endpoints/builders';
 
 export interface PolymarketClientConfig {
     gammaApiUrl?: string;
@@ -19,6 +20,7 @@ export class PolymarketClient {
     public readonly activity: ActivityEndpoints;
     public readonly trades: TradesEndpoints;
     public readonly leaderboard: LeaderboardEndpoints;
+    public readonly builders: BuildersEndpoints;
 
     constructor(config?: PolymarketClientConfig) {
         this.gammaApi = axios.create({
@@ -40,5 +42,6 @@ export class PolymarketClient {
         this.activity = new ActivityEndpoints(this);
         this.trades = new TradesEndpoints(this);
         this.leaderboard = new LeaderboardEndpoints(this);
+        this.builders = new BuildersEndpoints(this);
     }
 }
