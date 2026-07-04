@@ -13,3 +13,7 @@ export interface GetSeriesParams {
     recurrence?: string;
     exclude_events?: boolean;
 }
+
+export interface GetSeriesByIdParams {
+    include_chat?: boolean;
+}
