@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { KeysetEventsResponse, GetEventsKeysetParams, GetEventsParams, GetEventParams } from '../types/events';
+import { KeysetEventsResponse, GetEventsKeysetParams, GetEventsParams, GetEventParams, LiveVolume } from '../types/events';
 import { Event, Tag } from '../types/search';
 
 export class EventsEndpoints {
@@ -74,6 +74,18 @@ export class EventsEndpoints {
      */
     public async getEventTags(id: string | number): Promise<Tag[]> {
         const response = await this.client.gammaApi.get<Tag[]>(`/events/${id}/tags`);
+        return response.data;
+    }
+
+    /**
+     * Get live volume for an event.
+     * @param id The ID of the event.
+     * @returns Array of live volume data.
+     */
+    public async getLiveVolume(id: number): Promise<LiveVolume[]> {
+        const response = await this.client.dataApi.get<LiveVolume[]>('/live-volume', {
+            params: { id }
+        });
         return response.data;
     }
 }

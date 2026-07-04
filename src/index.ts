@@ -28,3 +28,7 @@ export * from './types/rebates';
 export * from './endpoints/rebates';
 export * from './types/events';
 export * from './endpoints/events';
+export * from './types/markets';
+export * from './endpoints/markets';
+export * from './types/holders';
+export * from './endpoints/holders';

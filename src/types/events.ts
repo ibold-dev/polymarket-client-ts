@@ -5,6 +5,16 @@ export interface KeysetEventsResponse {
     next_cursor?: string;
 }
 
+export interface MarketVolume {
+    market: string;
+    value: number;
+}
+
+export interface LiveVolume {
+    total: number;
+    markets: MarketVolume[];
+}
+
 export interface GetEventsKeysetParams {
     limit?: number;
     order?: string;
