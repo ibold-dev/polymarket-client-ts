@@ -6,3 +6,8 @@ export interface SportsMetadata {
     tags?: string;
     series?: string;
 }
+
+export interface SportsMarketTypesResponse {
+    marketTypes?: string[];
+}
+
