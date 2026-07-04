@@ -1,5 +1,5 @@
 import { PolymarketClient } from '../client';
-import { Tag, GetTagsParams, GetTagParams } from '../types/tags';
+import { Tag, GetTagsParams, GetTagParams, RelatedTag, GetRelatedTagsParams } from '../types/tags';
 
 export class TagsEndpoints {
     constructor(private readonly client: PolymarketClient) {}
@@ -45,6 +45,22 @@ export class TagsEndpoints {
         const queryParams: Record<string, any> = { ...params };
 
         const response = await this.client.gammaApi.get<Tag>(`/tags/slug/${slug}`, {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+
+    /**
+     * Get related tags (relationships) by tag ID.
+     * @param id The tag ID.
+     * @param params Query parameters for fetching related tags.
+     * @returns An array of related tag relationships.
+     */
+    public async getRelatedTagsById(id: number | string, params?: GetRelatedTagsParams): Promise<RelatedTag[]> {
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.gammaApi.get<RelatedTag[]>(`/tags/${id}/related-tags`, {
             params: queryParams
         });
 
