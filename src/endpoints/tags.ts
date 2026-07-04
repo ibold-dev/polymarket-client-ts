@@ -82,5 +82,20 @@ export class TagsEndpoints {
 
         return response.data;
     }
-}
 
+    /**
+     * Get tags related to a tag ID.
+     * @param id The tag ID.
+     * @param params Query parameters for fetching related tags.
+     * @returns An array of tags.
+     */
+    public async getTagsRelatedToATagById(id: number | string, params?: GetRelatedTagsParams): Promise<Tag[]> {
+        const queryParams: Record<string, any> = { ...params };
+
+        const response = await this.client.gammaApi.get<Tag[]>(`/tags/${id}/related-tags/tags`, {
+            params: queryParams
+        });
+
+        return response.data;
+    }
+}
